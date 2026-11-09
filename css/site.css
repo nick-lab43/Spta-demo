@@ -27,3 +27,33 @@
 .home-mission h2 em{font-style:normal;color:var(--red)}
 .home-mission-inner>div:last-child p{font-size:15px;color:#4f5359}
 @media(max-width:680px){.home-mission-inner{grid-template-columns:1fr;gap:20px}.home-mission{padding:55px 24px}}
+
+
+/* Member memorials, fare notices and fuel price updates */
+.notice-nav{display:flex;gap:10px;flex-wrap:wrap;padding:18px max(calc((100% - var(--max))/2),28px);border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:3}
+.notice-nav a{font-size:11px;font-weight:800;padding:9px 13px;border:1px solid var(--line)}
+.notice-nav a:hover{border-color:var(--red);color:var(--red)}
+.notice-section{scroll-margin-top:75px}
+.notice-section-muted{background:var(--paper);padding:1px 0}
+.notice-empty{display:flex;gap:22px;align-items:center;padding:30px;border:1px dashed #c9c6c0;background:#fff}
+.notice-symbol{width:48px;height:48px;display:grid;place-items:center;flex:none;background:#f7e8e8;color:var(--red);font-size:27px;font-weight:400}
+.notice-empty h3,.update-card h3{font-size:21px;margin:0 0 8px}
+.notice-empty p,.update-card p,.editorial-note{font-size:13px;color:var(--muted);margin:0}
+.editorial-note{margin-top:18px;font-size:11px}
+.update-card{max-width:850px;background:#fff;border:1px solid var(--line);padding:28px}
+.update-meta{display:flex;justify-content:space-between;gap:15px;margin-bottom:18px;font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.08em}
+.update-card p{margin:10px 0 18px}
+.fuel-status{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);margin-bottom:20px}
+.fuel-status>div{padding:25px}
+.fuel-status>div+div{border-left:1px solid var(--line)}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#23834b;margin-right:9px}
+.fuel-status strong{font-size:14px}
+.fuel-status p,.fuel-pending p{font-size:12px;color:var(--muted)}
+.fuel-pending{background:var(--paper)}
+.fuel-pending .tag{display:block;margin-bottom:12px}
+.fuel-explainer{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.fuel-explainer article{padding:22px;border:1px solid var(--line)}
+.fuel-type{font-size:9px;letter-spacing:.15em;font-weight:900;color:var(--red)}
+.fuel-explainer h3{font-size:17px;margin:10px 0}
+.fuel-explainer p{font-size:11px;color:var(--muted)}
+@media(max-width:680px){.notice-nav{position:static;padding:14px 24px}.notice-nav a{flex:1 1 42%;text-align:center}.notice-empty{align-items:flex-start;padding:22px}.fuel-status{grid-template-columns:1fr}.fuel-status>div+div{border-left:0;border-top:1px solid var(--line)}.fuel-explainer{grid-template-columns:1fr 1fr}.update-card{padding:22px}}
