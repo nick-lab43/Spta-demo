@@ -198,3 +198,26 @@ a:focus-visible,button:focus-visible{outline:3px solid #9fca35;outline-offset:3p
  .contact-form{padding:25px}
  .site-footer{padding:42px 24px}
 }
+
+
+/* Homepage opening sequence */
+body.intro-active{overflow:hidden}
+.intro-screen{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:#102c24;color:#fff;opacity:1;visibility:visible}
+.intro-screen:before,.intro-screen:after{content:"";position:absolute;width:min(76vw,760px);aspect-ratio:1;border:1px solid #c9ef4a22;border-radius:50%;animation:intro-ring 3.8s cubic-bezier(.2,.7,.2,1) both}
+.intro-screen:after{width:min(58vw,570px);animation-delay:.12s;border-color:#c9ef4a30}
+.intro-orbit{position:absolute;width:min(42vw,410px);aspect-ratio:1;border:1px solid #c9ef4a28;border-radius:50%;animation:intro-ring 3.5s .2s cubic-bezier(.2,.7,.2,1) both}
+.intro-orbit-two{width:min(25vw,240px);animation-delay:.32s}
+.intro-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px}
+.intro-mark{display:grid;place-items:center;width:104px;height:104px;border:1px solid #c9ef4a;border-radius:50%;color:#c9ef4a;font-size:27px;font-weight:900;letter-spacing:-.07em;animation:intro-mark-in .9s .15s both}
+.intro-rule{display:block;width:0;height:3px;margin:28px 0 22px;background:#c9ef4a;animation:intro-rule-in .7s .75s forwards}
+.intro-location{margin:0 0 14px;color:#c9ef4a;font-size:10px;font-weight:800;letter-spacing:.28em;opacity:0;animation:intro-copy-in .6s 1.05s forwards}
+.intro-content h1{margin:0;color:#fff;font-size:clamp(38px,7vw,76px);font-weight:800;letter-spacing:-.065em;line-height:1;opacity:0;animation:intro-copy-in .7s 1.25s forwards}
+.intro-tagline{margin:18px 0 0;color:#d4ded8;font-size:clamp(13px,2vw,17px);letter-spacing:.025em;opacity:0;animation:intro-copy-in .7s 1.55s forwards}
+.intro-skip{position:absolute;right:clamp(20px,4vw,48px);bottom:clamp(20px,4vw,42px);z-index:2;border:1px solid #ffffff70;border-radius:999px;background:transparent;padding:11px 18px;color:#fff;font:inherit;font-size:12px;cursor:pointer;transition:background .2s,border-color .2s}
+.intro-skip:hover{border-color:#c9ef4a;background:#c9ef4a18}
+.intro-closing{opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s}
+@keyframes intro-ring{0%{transform:scale(.55);opacity:0}35%{opacity:1}100%{transform:scale(1.18);opacity:.25}}
+@keyframes intro-mark-in{0%{transform:scale(.72) rotate(-12deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes intro-rule-in{to{width:74px}}
+@keyframes intro-copy-in{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+@media(prefers-reduced-motion:reduce){.intro-screen:before,.intro-screen:after,.intro-orbit,.intro-mark,.intro-rule,.intro-location,.intro-content h1,.intro-tagline{animation:none;opacity:1;transform:none}.intro-rule{width:74px}.intro-closing{transition:none}}
