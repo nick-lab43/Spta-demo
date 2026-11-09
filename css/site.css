@@ -20,3 +20,10 @@
 .value-card li{padding:0 0 8px}
 .value-card-wide{grid-column:1/-1}
 @media(max-width:680px){.theme-grid,.values-grid{grid-template-columns:1fr}.value-card-wide{grid-column:auto}.mission-panel{padding:60px 24px}.mission-panel blockquote{font-size:20px}}
+
+.home-mission{background:#f5f4f1;padding:68px 28px}
+.home-mission-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:9%;align-items:center}
+.home-mission h2{font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.04em;margin:0}
+.home-mission h2 em{font-style:normal;color:var(--red)}
+.home-mission-inner>div:last-child p{font-size:15px;color:#4f5359}
+@media(max-width:680px){.home-mission-inner{grid-template-columns:1fr;gap:20px}.home-mission{padding:55px 24px}}
