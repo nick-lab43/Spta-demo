@@ -1,11 +1,11 @@
-# Client image assets
+# SPTA image assets
 
-The client supplied 12 JPEG files in `Spta-images.zip`. The source archive has been inspected and the filenames/dimensions are recorded in `docs/SITE-BLUEPRINT.md`.
+The gallery page references the 12 client-supplied JPEG files by their original filenames.
 
-The original image binaries have not yet been committed to this repository. Add the approved JPEGs to this directory using their original filenames before treating the visual prototype as complete.
+Extract `spta-web-assets.zip` into the repository root. It contains the JPEGs under `assets/images/` and preserves the filenames expected by `pages/gallery.html`.
 
-The homepage currently references:
-- `IMG-20261109-WA0015.jpg` — SPTA fleet / "Together as One" sign.
-- `IMG-20261109-WA0019.jpg` — Polokwane city view.
+Do not rename the files unless the gallery references are updated.
 
-The remaining supplied photographs should be integrated into the gallery after image captions and place identifications are confirmed with the client.
+Final publication still requires SPTA to confirm image permissions and approve location-specific captions.
+
+The original JPEG binaries are not yet committed to this repository; the archive is supplied separately because the connected GitHub file writer cannot transfer local binary files directly.
