@@ -1,0 +1,79 @@
+{
+  "project": "SPTA demo",
+  "target_repository_path": "assets/images/",
+  "files": [
+    {
+      "filename": "IMG-20261109-WA0013.jpg",
+      "width": 561,
+      "height": 294,
+      "bytes": 26058
+    },
+    {
+      "filename": "IMG-20261109-WA0014.jpg",
+      "width": 680,
+      "height": 510,
+      "bytes": 88730
+    },
+    {
+      "filename": "IMG-20261109-WA0015.jpg",
+      "width": 448,
+      "height": 446,
+      "bytes": 28298
+    },
+    {
+      "filename": "IMG-20261109-WA0016.jpg",
+      "width": 512,
+      "height": 510,
+      "bytes": 63994
+    },
+    {
+      "filename": "IMG-20261109-WA0017.jpg",
+      "width": 1022,
+      "height": 575,
+      "bytes": 170876
+    },
+    {
+      "filename": "IMG-20261109-WA0018.jpg",
+      "width": 289,
+      "height": 312,
+      "bytes": 37539
+    },
+    {
+      "filename": "IMG-20261109-WA0019.jpg",
+      "width": 1024,
+      "height": 683,
+      "bytes": 187836
+    },
+    {
+      "filename": "IMG-20261109-WA0020.jpg",
+      "width": 287,
+      "height": 510,
+      "bytes": 30564
+    },
+    {
+      "filename": "IMG-20261109-WA0021.jpg",
+      "width": 638,
+      "height": 480,
+      "bytes": 77773
+    },
+    {
+      "filename": "IMG-20261109-WA0022.jpg",
+      "width": 680,
+      "height": 510,
+      "bytes": 156467
+    },
+    {
+      "filename": "IMG-20261109-WA0023.jpg",
+      "width": 415,
+      "height": 739,
+      "bytes": 50888
+    },
+    {
+      "filename": "IMG-20261109-WA0024.jpg",
+      "width": 335,
+      "height": 597,
+      "bytes": 39829
+    }
+  ],
+  "note": "Original supplied JPEGs. Preserve filenames because the gallery page references them."
+}
