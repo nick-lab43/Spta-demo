@@ -198,3 +198,29 @@ a:focus-visible,button:focus-visible{outline:3px solid #9fca35;outline-offset:3p
  .contact-form{padding:25px}
  .site-footer{padding:42px 24px}
 }
+
+
+/* Animated first-visit welcome */
+.intro-screen{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;overflow:hidden;background:#102c24;color:#fff;opacity:1;visibility:visible}
+.intro-screen[hidden]{display:none}
+.intro-screen:before,.intro-screen:after{content:"";position:absolute;width:min(78vw,760px);aspect-ratio:1;border:1px solid #c9ef4a22;border-radius:50%;pointer-events:none}
+.intro-screen:before{animation:intro-orbit 2.8s ease-out both}
+.intro-screen:after{width:min(58vw,560px);animation:intro-orbit 2.8s .12s ease-out both}
+.intro-screen-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px}
+.intro-mark{font-size:clamp(64px,13vw,112px);font-weight:950;letter-spacing:-.095em;line-height:1;color:var(--lime);opacity:0;transform:translateY(24px) scale(.94);animation:intro-mark-in .75s .18s cubic-bezier(.2,.8,.2,1) forwards}
+.intro-rule{width:0;height:3px;background:var(--lime);margin:23px 0 25px;animation:intro-rule-in .65s .72s ease-out forwards}
+.intro-kicker{font-size:10px;font-weight:800;letter-spacing:.28em;color:#c6d3ca;opacity:0;animation:intro-copy-in .6s .95s ease-out forwards}
+.intro-screen h2{font-size:clamp(34px,7vw,64px);line-height:1;letter-spacing:-.06em;margin:12px 0;opacity:0;transform:translateY(14px);animation:intro-copy-in .65s 1.08s ease-out forwards}
+.intro-screen h2 em{font-style:normal;color:var(--lime)}
+.intro-subtitle{font-size:13px;letter-spacing:.08em;color:#d0dbd3;opacity:0;animation:intro-copy-in .6s 1.3s ease-out forwards}
+.intro-skip{margin-top:38px;border:1px solid #ffffff55;border-radius:999px;background:transparent;color:#fff;padding:10px 17px;font:inherit;font-size:11px;cursor:pointer;opacity:0;animation:intro-copy-in .5s 1.55s ease-out forwards}
+.intro-skip:hover{background:#ffffff16;border-color:var(--lime)}
+.intro-skip span{color:var(--lime);padding-left:8px}
+body.intro-active{overflow:hidden}
+.intro-screen.is-closing{pointer-events:none;animation:intro-screen-out .62s ease-in forwards}
+@keyframes intro-mark-in{to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes intro-rule-in{to{width:min(210px,48vw)}}
+@keyframes intro-copy-in{to{opacity:1;transform:translateY(0)}}
+@keyframes intro-orbit{0%{opacity:0;transform:scale(.72)}45%{opacity:1}100%{opacity:.55;transform:scale(1.08)}}
+@keyframes intro-screen-out{to{opacity:0;visibility:hidden}}
+@media(prefers-reduced-motion:reduce){.intro-screen:before,.intro-screen:after,.intro-mark,.intro-rule,.intro-kicker,.intro-screen h2,.intro-subtitle,.intro-skip{animation:none!important;opacity:1!important;transform:none!important}.intro-rule{width:min(210px,48vw)}.intro-screen.is-closing{animation:none!important}}
