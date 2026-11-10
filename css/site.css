@@ -746,3 +746,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
  .home-business-grid{grid-template-columns:1fr;gap:10px;margin-top:28px}.business-tile{min-height:205px}.business-tile-icon{font-size:125px;top:20px}
 }
 @media(prefers-reduced-motion:reduce){.home-route-card,.business-tile{transition:none}.home-route-card:hover,.business-tile:hover{transform:none}}
+
+
+/* Final responsive art direction: remove legacy circular hero ornament */
+.hero:before{
+ content:"";position:absolute;inset:0;z-index:1;left:0;top:0;width:auto;height:auto;
+ border:0;border-radius:0;box-shadow:none;pointer-events:none;
+ background:linear-gradient(90deg,rgba(8,30,23,.88) 0%,rgba(8,30,23,.66) 42%,rgba(8,30,23,.18) 100%),linear-gradient(0deg,rgba(8,30,23,.55),transparent 55%);
+}
+@media(max-width:680px){
+ .hero{min-height:0}
+ .hero-copy{min-height:0;padding:72px 24px 112px}
+ .hero h1{font-size:clamp(43px,10.7vw,58px);line-height:.94;letter-spacing:-.07em;max-width:100%;margin-bottom:20px}
+ .hero-lede{max-width:340px;line-height:1.65}
+ .hero .actions{margin-top:26px;gap:17px}
+ .hero .button-light{padding:13px 17px}
+ .hero-ribbon{min-height:62px}
+}
