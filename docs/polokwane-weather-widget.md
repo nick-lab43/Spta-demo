@@ -1,27 +1,44 @@
 # Polokwane weather widget
 
-The homepage uses the hosted AskWeather.ai weather widget for a fixed location: Polokwane, South Africa.
+The homepage uses the original SPTA-designed weather desk. Its layout, weather artwork, status treatment and responsive styling are maintained locally; MET Norway supplies forecast data through a Cloudflare Worker proxy.
 
-## How it works
+## Architecture
 
-The homepage contains the provider's widget container and loads its hosted script:
+- Front end: `index.html` and `js/site.js`
+- Proxy: `workers/weather-api/src/index.js`
+- Provider: MET Norway Locationforecast 2.0, global coverage
+- Fixed coordinates: Polokwane, South Africa (four decimal places)
+- Cache: three hours. Outside the Nordic region, MET Norway's global forecast is updated every six hours; identical requests must not be repeated more often than every three hours.
+- No API key or provider secret is stored in the browser.
 
-- Widget location: `Polokwane, South Africa`
-- Script: `https://askweather.ai/widget.js?v=1.3`
-- Provider: https://askweather.ai/weather-widget
+The Worker supplies the identifying `User-Agent` and restricts browser requests to the published GitHub Pages origin. It returns a small normalised JSON response.
 
-No API key, account, Cloudflare Worker, backend, or local weather-fetching JavaScript is required. The provider says the widget refreshes hourly and includes current conditions, feels-like temperature, humidity, wind, UV, rain probability, and a daily summary. Its own attribution link is displayed inside the widget.
+## Deploy the Worker
 
-## Operational considerations
+1. Install Wrangler and authenticate with Cloudflare.
+2. From `workers/weather-api`, run `npx wrangler deploy`.
+3. Copy the deployed Worker HTTPS URL.
+4. Set `window.SPTA_WEATHER_API_URL` to that URL before the weather widget initialises in `js/site.js`.
+5. Deploy the GitHub Pages site.
 
-- The widget depends on AskWeather.ai and its third-party script being available.
-- Weather data is supplied by the provider, not measured by SPTA.
-- The provider's stated update interval is hourly; it is not a real-time station feed.
-- The provider's availability, data accuracy, privacy statements, and continued free access have not been independently audited by SPTA.
-- If the provider changes or removes its embed service, the weather panel may stop rendering.
-- The location is fixed; visitors are not asked to share their location.
+The endpoint is intentionally not hard-coded until the Worker has actually been deployed. Without it, the widget displays a setup state rather than invented values.
 
-## Maintenance
+## Data displayed
 
-No site-side key or configuration is needed. To remove the widget, delete the `weather-embed` block from `index.html` and its script include. The surrounding section and styling can remain.
+- Current forecast air temperature
+- Apparent (feels-like) temperature
+- Relative humidity
+- Wind speed, converted from metres per second to kilometres per hour
+- Accumulated forecast precipitation over the next six forecast hours
 
+The rain value is millimetres of forecast precipitation, not a probability or measured rainfall. Conditions are model forecasts, not readings from an SPTA weather station.
+
+## Attribution and operating limits
+
+Weather data © MET Norway, distributed under CC BY 4.0. Attribution is shown next to the widget and links to the provider. MET Norway requires an identifying User-Agent, caching, and no unnecessary repeat requests. For locations outside the Nordic region, identical requests must not be repeated more often than every three hours.
+
+MET Norway does not provide an SLA. Forecast availability and accuracy are not guaranteed. Review current terms before material changes:
+
+- https://api.met.no/
+- https://api.met.no/doc/TermsOfService
+- https://api.met.no/weatherapi/locationforecast/2.0/documentation
