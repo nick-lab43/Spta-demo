@@ -40,6 +40,44 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
 
+  const weatherWidget=document.querySelector('[data-weather-widget]');
+  if(weatherWidget){
+    const status=weatherWidget.querySelector('[data-weather-status]');
+    const note=weatherWidget.querySelector('[data-weather-note]');
+    const art=weatherWidget.querySelector('[data-weather-art]');
+    const set=(selector,value)=>{const el=weatherWidget.querySelector(selector);if(el)el.textContent=value;};
+    const fail=message=>{status.textContent='Unavailable';status.classList.remove('is-live');status.classList.add('is-error');set('[data-weather-updated]','Forecast feed unavailable');note.textContent=message;};
+    const load=async()=>{
+      const endpoint=window.SPTA_WEATHER_API_URL||'';
+      if(!endpoint){status.textContent='Setup required';set('[data-weather-updated]','Weather service not connected');note.textContent='The weather panel design is active. The secure forecast endpoint must be configured before live conditions can appear.';return;}
+      try{
+        status.textContent='Updating';
+        const response=await fetch(endpoint,{headers:{Accept:'application/json'}});
+        if(!response.ok)throw new Error('The forecast service returned an error.');
+        const data=await response.json();
+        if(typeof data.temperature!=='number')throw new Error('Forecast data was incomplete.');
+        set('[data-weather-temp]',Math.round(data.temperature)+'°');
+        set('[data-weather-condition]',data.condition||'Conditions unavailable');
+        set('[data-weather-feels]',Number.isFinite(data.feelsLike)?Math.round(data.feelsLike)+'°C':'—');
+        set('[data-weather-humidity]',Number.isFinite(data.humidity)?Math.round(data.humidity)+'%':'—');
+        set('[data-weather-wind]',Number.isFinite(data.windSpeed)?Math.round(data.windSpeed)+' km/h':'—');
+        set('[data-weather-rain]',Number.isFinite(data.rainNext6h)?data.rainNext6h.toFixed(1)+' mm':'— mm');
+        const updated=data.updatedAt?new Date(data.updatedAt):null;
+        set('[data-weather-updated]',updated&&!Number.isNaN(updated.getTime())?'Forecast issued '+updated.toLocaleTimeString('en-ZA',{hour:'2-digit',minute:'2-digit'}):'Forecast data received');
+        note.textContent='Forecast for Polokwane. Rain figure is accumulated forecast precipitation over the next six hours, not a probability or measured observation.';
+        status.textContent='Forecast data';status.classList.remove('is-error');status.classList.add('is-live');
+        art.classList.remove('is-clear','is-cloudy','is-rain','is-snow');
+        const symbol=String(data.symbol||'').toLowerCase();
+        if(symbol.includes('thunder')||symbol.includes('rain')||symbol.includes('sleet'))art.classList.add('is-rain');
+        else if(symbol.includes('snow'))art.classList.add('is-snow');
+        else if(symbol.includes('clearsky')||symbol.includes('sun'))art.classList.add('is-clear');
+        else art.classList.add('is-cloudy');
+      }catch(error){fail(error.message||'Unable to retrieve the forecast.');}
+    };
+    load();
+    window.setInterval(load,3*60*60*1000);
+  }
+
   const intro=document.querySelector('#intro-screen');
   if(!intro)return;
   let alreadySeen=false;
