@@ -40,9 +40,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
 
-  // WeatherAPI.com: commercial-use free tier; configure the public widget key here.
-  // The key is visible in browser requests. Restrict its quota and use it only for this site.
-  const WEATHER_API_KEY = '';
+  // The browser calls the Cloudflare Worker; the WeatherAPI key stays server-side.
+  const WEATHER_API_URL = '';
   const weatherWidget = document.querySelector('[data-weather-widget]');
   if (weatherWidget) {
     const weatherStatus = weatherWidget.querySelector('[data-weather-status]');
@@ -60,19 +59,19 @@ document.addEventListener('DOMContentLoaded',()=>{
       weatherNote.textContent = message;
     };
     const loadPolokwaneWeather = async () => {
-      if (!WEATHER_API_KEY) {
+      if (!WEATHER_API_URL) {
         weatherStatus.textContent = 'Setup required';
         setWeatherText('[data-weather-updated]', 'Weather service not connected');
-        weatherNote.textContent = 'Add a WeatherAPI.com key in js/site.js to activate live conditions. The page will not display invented weather values.';
+        weatherNote.textContent = 'The secure weather service has not been configured yet. No weather values are being invented.';
         return;
       }
       try {
         weatherStatus.textContent = 'Updating';
-        const endpoint = 'https://api.weatherapi.com/v1/forecast.json?key=' +
-          encodeURIComponent(WEATHER_API_KEY) +
-          '&q=Polokwane%2C%20South%20Africa&days=1&aqi=no&alerts=no';
-        const response = await fetch(endpoint, { headers: { Accept: 'application/json' } });
-        if (!response.ok) throw new Error(response.status === 401 ? 'The weather API key was rejected.' : 'The weather service returned an error.');
+        const response = await fetch(WEATHER_API_URL, {
+          method: 'GET',
+          headers: { Accept: 'application/json' }
+        });
+        if (!response.ok) throw new Error('The weather service returned an error.');
         const data = await response.json();
         if (!data.current || !data.location) throw new Error('Weather data was incomplete.');
         const current = data.current;
