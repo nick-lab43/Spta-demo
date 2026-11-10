@@ -342,3 +342,46 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
  .office-location-heading .button{align-self:flex-start}
  .office-map-frame{height:320px}
 }
+
+
+/* Homepage fuel-price bulletin and Polokwane visual identity */
+.home-fuel{background:#102c24;color:#fff;padding:76px 28px}
+.home-fuel-inner{max-width:1164px;margin:0 auto;display:grid;grid-template-columns:.72fr 1.28fr;gap:30px 7%;align-items:start}
+.home-fuel-heading .eyebrow,.home-fuel-heading h2 em{color:#c9ef4a}
+.home-fuel-heading h2{font-size:clamp(36px,4vw,54px);line-height:1;letter-spacing:-.055em;margin:0 0 18px}
+.home-fuel-heading>p:not(.eyebrow){max-width:340px;color:#d2ddd5;font-size:14px;line-height:1.75}
+.home-fuel-effective{display:inline-block;margin-top:10px;padding:8px 13px;border:1px solid #c9ef4a70;border-radius:999px;color:#e5f5bc;font-size:10px;font-weight:800;letter-spacing:.08em}
+.home-fuel-data{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.home-fuel-item{padding:21px;background:#fff;color:#102c24;border-radius:4px 18px 4px 4px;display:flex;flex-direction:column;gap:6px}
+.home-fuel-item>span{font-size:11px;font-weight:800;color:#53645b}
+.home-fuel-item strong{font-size:clamp(24px,3vw,34px);letter-spacing:-.05em}
+.home-fuel-item strong small{font-size:13px;letter-spacing:0}
+.home-fuel-item em{font-size:10px;font-style:normal;color:#6d842e;font-weight:700}
+.home-fuel-foot{grid-column:2;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center}
+.home-fuel-foot p{flex-basis:100%;margin:0;color:#c3d0c7;font-size:11px;line-height:1.7}
+.home-fuel-foot a{color:#c9ef4a;font-size:11px;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.home-fuel-foot a span{padding-left:4px}
+.home-place-identity{padding:86px max(calc((100% - 1164px)/2),28px);background:#f1f4ed}
+.home-place-heading{max-width:660px;margin:0 0 30px}
+.home-place-heading h2{font-size:clamp(36px,4.2vw,56px);line-height:1.02;letter-spacing:-.055em;margin:0 0 14px}
+.home-place-heading h2 em{color:#789b2c}
+.home-place-heading>p:last-child{max-width:570px;color:#657168;font-size:14px;line-height:1.75}
+.home-place-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px}
+.home-place-card{margin:0;min-width:0;overflow:hidden;background:#fff;border-radius:5px 22px 5px 5px;box-shadow:0 12px 32px #102c2410}
+.home-place-card img{display:block;width:100%;height:340px;object-fit:cover}
+.home-place-city img{object-position:center 42%}
+.home-place-stadium img{object-position:center}
+.home-place-card figcaption{display:flex;flex-direction:column;gap:5px;padding:17px 19px 19px}
+.home-place-card figcaption strong{font-size:16px}
+.home-place-card figcaption span{font-size:12px;color:#657168}
+.home-place-card figcaption small{font-size:10px;color:#657168;margin-top:5px}
+.home-place-card figcaption a{color:#526f27;text-decoration:underline;text-underline-offset:2px}
+@media(max-width:760px){
+ .home-fuel{padding:60px 24px}
+ .home-fuel-inner{grid-template-columns:1fr;gap:24px}
+ .home-fuel-foot{grid-column:1}
+ .home-place-identity{padding:65px 24px}
+ .home-place-grid{grid-template-columns:1fr}
+ .home-place-card img{height:auto;aspect-ratio:16/9}
+}
+@media(max-width:420px){.home-fuel-data{grid-template-columns:1fr}.home-fuel-item{padding:18px}}
