@@ -582,15 +582,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   overflow:hidden;background:#102c24;
 }
 .hero:before{
-  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(90deg,rgba(8, thirty, 23, 0) 0%,transparent 0%);
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(90deg,rgba(8,30,23,.96) 0%,rgba(8,30,23,.86) 34%,rgba(8,30,23,.48) 65%,rgba(8,30,23,.12) 100%),
              linear-gradient(0deg,rgba(8,30,23,.5),transparent 45%);
 }
 .hero-photo{
   position:absolute;inset:0;z-index:-1;min-height:0;
   background-image:url('../assets/images/IMG-20261109-WA0015.jpg');
-  background-position:center 48%;background-size:cover;
+  background-position:center 48%;background-size:cover;z-index:0;
   transform:scale(1.015);
 }
 .hero-copy{
