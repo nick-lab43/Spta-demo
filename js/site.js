@@ -39,6 +39,77 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   }
 
+
+  // WeatherAPI.com: commercial-use free tier; configure the public widget key here.
+  // The key is visible in browser requests. Restrict its quota and use it only for this site.
+  const WEATHER_API_KEY = '';
+  const weatherWidget = document.querySelector('[data-weather-widget]');
+  if (weatherWidget) {
+    const weatherStatus = weatherWidget.querySelector('[data-weather-status]');
+    const weatherNote = weatherWidget.querySelector('[data-weather-note]');
+    const weatherArt = weatherWidget.querySelector('[data-weather-art]');
+    const setWeatherText = (selector, value) => {
+      const element = weatherWidget.querySelector(selector);
+      if (element) element.textContent = value;
+    };
+    const showWeatherError = (message) => {
+      weatherStatus.textContent = 'Unavailable';
+      weatherStatus.classList.remove('is-live');
+      weatherStatus.classList.add('is-error');
+      setWeatherText('[data-weather-updated]', 'Weather feed unavailable');
+      weatherNote.textContent = message;
+    };
+    const loadPolokwaneWeather = async () => {
+      if (!WEATHER_API_KEY) {
+        weatherStatus.textContent = 'Setup required';
+        setWeatherText('[data-weather-updated]', 'Weather service not connected');
+        weatherNote.textContent = 'Add a WeatherAPI.com key in js/site.js to activate live conditions. The page will not display invented weather values.';
+        return;
+      }
+      try {
+        weatherStatus.textContent = 'Updating';
+        const endpoint = 'https://api.weatherapi.com/v1/forecast.json?key=' +
+          encodeURIComponent(WEATHER_API_KEY) +
+          '&q=Polokwane%2C%20South%20Africa&days=1&aqi=no&alerts=no';
+        const response = await fetch(endpoint, { headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error(response.status === 401 ? 'The weather API key was rejected.' : 'The weather service returned an error.');
+        const data = await response.json();
+        if (!data.current || !data.location) throw new Error('Weather data was incomplete.');
+        const current = data.current;
+        const condition = current.condition?.text || 'Conditions unavailable';
+        const code = Number(current.condition?.code || 0);
+        const hour = Number((data.location.localtime || '').slice(11, 13));
+        const hours = data.forecast?.forecastday?.[0]?.hour || [];
+        const upcoming = hours.filter(item => Number(item.time.slice(11, 13)) >= hour).slice(0, 6);
+        const rainChance = upcoming.length
+          ? Math.max(...upcoming.map(item => Number(item.chance_of_rain || 0)))
+          : null;
+        setWeatherText('[data-weather-temp]', Math.round(current.temp_c) + '°');
+        setWeatherText('[data-weather-condition]', condition);
+        setWeatherText('[data-weather-feels]', Math.round(current.feelslike_c) + '°C');
+        setWeatherText('[data-weather-humidity]', Math.round(current.humidity) + '%');
+        setWeatherText('[data-weather-wind]', Math.round(current.wind_kph) + ' km/h');
+        setWeatherText('[data-weather-rain]', rainChance === null ? '—' : rainChance + '%');
+        setWeatherText('[data-weather-updated]', 'Updated ' + (current.last_updated || data.location.localtime || '').slice(11, 16));
+        weatherNote.textContent = rainChance === null
+          ? 'Current conditions. Rain probability is not available for the remaining forecast hours.'
+          : 'Rain chance is the highest hourly probability over the next six hours. Conditions are modelled and may change.';
+        weatherStatus.textContent = 'Live data';
+        weatherStatus.classList.remove('is-error');
+        weatherStatus.classList.add('is-live');
+        weatherArt.classList.remove('is-clear', 'is-cloudy', 'is-rain', 'is-snow');
+        if ([1000].includes(code)) weatherArt.classList.add('is-clear');
+        else if ([1063, 1150, 1153, 1168, 1171, 1180, 1183, 1186, 1189, 1192, 1195, 1198, 1201, 1240, 1243, 1246, 1273, 1276].includes(code)) weatherArt.classList.add('is-rain');
+        else if ([1066, 1114, 1117, 1210, 1213, 1216, 1219, 1222, 1225, 1255, 1258].includes(code)) weatherArt.classList.add('is-snow');
+        else weatherArt.classList.add('is-cloudy');
+      } catch (error) {
+        showWeatherError(error.message || 'Unable to retrieve current weather.');
+      }
+    };
+    loadPolokwaneWeather();
+    window.setInterval(loadPolokwaneWeather, 15 * 60 * 1000);
+  }
+
   const intro=document.querySelector('#intro-screen');
   if(!intro)return;
   let alreadySeen=false;
