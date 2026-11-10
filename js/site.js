@@ -5,13 +5,15 @@ document.addEventListener('DOMContentLoaded',()=>{
     menu.addEventListener('click',()=>{
       const open=nav.classList.toggle('open');
       menu.setAttribute('aria-expanded',String(open));
-      menu.textContent=open?'Close':'Menu';
+      const label=menu.querySelector('.menu-toggle-label');
+      if(label)label.textContent=open?'Close':'Menu';
     });
     nav.addEventListener('keydown',event=>{
       if(event.key==='Escape'&&nav.classList.contains('open')){
         nav.classList.remove('open');
         menu.setAttribute('aria-expanded','false');
-        menu.textContent='Menu';
+        const label=menu.querySelector('.menu-toggle-label');
+        if(label)label.textContent='Menu';
         menu.focus();
       }
     });
