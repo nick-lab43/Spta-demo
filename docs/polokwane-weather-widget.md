@@ -1,28 +1,27 @@
 # Polokwane weather widget
 
-The homepage weather desk is integrated with WeatherAPI.com.
+The homepage uses the hosted AskWeather.ai weather widget for a fixed location: Polokwane, South Africa.
 
-## Activate the feed
+## How it works
 
-1. Create a WeatherAPI.com account and obtain an API key: https://www.weatherapi.com/signup
-2. Open `js/site.js`.
-3. Replace the empty `WEATHER_API_KEY` value with the key.
-4. Commit and deploy the change.
+The homepage contains the provider's widget container and loads its hosted script:
 
-WeatherAPI.com currently advertises a free tier of 100,000 calls per month and explicitly permits commercial use. Its terms require visible WeatherAPI.com credit for free-tier use. The homepage includes that attribution. Confirm the provider's current terms and quota before production use.
+- Widget location: `Polokwane, South Africa`
+- Script: `https://askweather.ai/widget.js?v=1.3`
+- Provider: https://askweather.ai/weather-widget
 
-The API key is sent from the browser and is therefore public. It must not be treated as a secret. Use a key dedicated to this website, monitor its quota, and rotate it if abused. A server-side proxy would be preferable if the site later gains a backend.
+No API key, account, Cloudflare Worker, backend, or local weather-fetching JavaScript is required. The provider says the widget refreshes hourly and includes current conditions, feels-like temperature, humidity, wind, UV, rain probability, and a daily summary. Its own attribution link is displayed inside the widget.
 
-## Data displayed
+## Operational considerations
 
-- Current temperature and condition
-- Feels-like temperature
-- Relative humidity
-- Wind speed
-- Highest hourly chance of rain over the next six forecast hours
+- The widget depends on AskWeather.ai and its third-party script being available.
+- Weather data is supplied by the provider, not measured by SPTA.
+- The provider's stated update interval is hourly; it is not a real-time station feed.
+- The provider's availability, data accuracy, privacy statements, and continued free access have not been independently audited by SPTA.
+- If the provider changes or removes its embed service, the weather panel may stop rendering.
+- The location is fixed; visitors are not asked to share their location.
 
-The rain figure is a forecast probability, not a measured rainfall amount. Weather is location-level API data, not a guaranteed observation from an SPTA weather station.
+## Maintenance
 
-The widget refreshes every 15 minutes while the page is open. If no key is configured, or the service fails, the widget shows a setup or unavailable state rather than fabricated values.
+No site-side key or configuration is needed. To remove the widget, delete the `weather-embed` block from `index.html` and its script include. The surrounding section and styling can remain.
 
-Provider: https://www.weatherapi.com/
