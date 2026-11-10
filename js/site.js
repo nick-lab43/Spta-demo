@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
 
+  // Set this to the deployed Cloudflare Worker URL to enable live forecast data.
+  window.SPTA_WEATHER_API_URL=window.SPTA_WEATHER_API_URL||'';
   const weatherWidget=document.querySelector('[data-weather-widget]');
   if(weatherWidget){
     const status=weatherWidget.querySelector('[data-weather-status]');
