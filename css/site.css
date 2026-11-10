@@ -385,3 +385,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
  .home-place-card img{height:auto;aspect-ratio:16/9}
 }
 @media(max-width:420px){.home-fuel-data{grid-template-columns:1fr}.home-fuel-item{padding:18px}}
+
+
+/* Expanded Polokwane homepage image story */
+.home-place-identity{padding-top:92px;padding-bottom:96px}
+.home-place-heading{margin-bottom:36px}
+.home-place-grid{grid-template-columns:1.12fr .88fr;grid-template-rows:repeat(2,minmax(220px,auto));gap:18px}
+.home-place-card{position:relative;min-height:250px}
+.home-place-card img{height:100%;min-height:250px;max-height:360px;object-fit:cover;transition:transform .55s ease}
+.home-place-card:hover img{transform:scale(1.035)}
+.home-place-city{grid-row:span 2}
+.home-place-city img{max-height:100%;min-height:520px}
+.home-place-stadium img,.home-place-museum img,.home-place-mall img{height:250px}
+.home-place-card figcaption{background:#fff}
+.home-place-card figcaption strong{font-size:17px}
+.home-place-card figcaption span{line-height:1.5}
+@media(max-width:760px){
+ .home-place-grid{grid-template-columns:1fr;grid-template-rows:auto}
+ .home-place-city{grid-row:auto}
+ .home-place-city img,.home-place-card img{min-height:0;height:auto;aspect-ratio:16/9;max-height:none}
+}
